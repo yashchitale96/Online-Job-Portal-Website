@@ -15,9 +15,15 @@ function SearchBar(props) {
         }))
     }
 
-    const search = async() => {
-        await props.fetchJobsCustom(jobCriteria);
-    }
+    const search = async () => {
+        console.log("Searching with criteria:", jobCriteria);
+        try {
+            await props.fetchJobsCustom(jobCriteria);
+        } catch (error) {
+            console.error("Error fetching jobs:", error);
+            // Optionally, handle the error (e.g., display a message to the user)
+        }
+    };
     
 
   return (
@@ -29,6 +35,7 @@ function SearchBar(props) {
             <option value="Backend Developer">Backend Developer</option>
             <option value="Android Developer">Android Developer</option>
             <option value="Developer Advocate">Developer Advocate</option>
+            <option value="Senior Developer">Senior Developer</option>
         </select>
         <select onChange={handleChange} name="type" value={jobCriteria.type} className='w-64 py-3 pl-4 bg-zinc-200 font-semibold rounded-md'>
             <option value="" disabled hidden>Job Type</option>
